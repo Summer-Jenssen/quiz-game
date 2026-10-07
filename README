@@ -1,1 +1,16 @@
+This was a project intended to improve my knowledge of networking in C! It uses socket, bind, listen, accept, and select to implement a simple quiz game, allowing a server to host the game and multiple clients to join in. Select is used for multiplexing, so the server handles stdin and socket in one loop. Questions are read in from a separate file, of which an example has been provided. A makefile has also been included for convenience. The cutsomization described below is implemented using getopt.
 
+
+Server customization:  
+./server [-f question_file] [-i IP_address] [-p port_number] [-h]  
+* -f question_file - sets the file questions are loaded in from! Defaults to qshort.txt  
+* -i IP_address - sets the address to bind to, default is 127.0.0.1
+* -p port_number - sets the port, default is 25555
+* -h - prints the usage info above!
+
+The client also has a few options:
+./client [-i IP_address] [-p port_number] [-h]
+* -i set the server address, defaults to 127.0.0.1
+* -p  sets the port, defaults to 25555
+
+When a player enters, they are prompted to enter their name. Players will not be able to enter anything else until the game has started. When it does, the server sends the question and three posisble answers to each player. Players may then enter a corresponding 1, 2, or 3, and the first player to answer will end that round. The server will reveal the correct answer and tally the scores before moving onto the next question. Once the last question has been answered, the server prints the winner or tied winners and end the connection. 
